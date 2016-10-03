@@ -35,6 +35,9 @@ dependencies {
     //include java library
     compile project(':joke_library')
 
+    compile project(":joke_activity")
+
+
 }
 
 apply plugin: 'com.google.gms.google-services'
