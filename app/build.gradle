@@ -32,6 +32,9 @@ dependencies {
     //ads
     compile 'com.google.firebase:firebase-ads:9.6.1'
 
+    //include java library
+    compile project(':joke_library')
+
 }
 
 apply plugin: 'com.google.gms.google-services'

@@ -21,6 +21,7 @@
         android:layout_below="@+id/instructions_text_view"
         android:onClick="tellJoke"
         android:text="@string/button_text"
+        android:id="@+id/btnJoke"
 
         />
 
