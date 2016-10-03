@@ -23,6 +23,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:24.1.1'
+
     // Added for AdMob
-    compile 'com.google.android.gms:play-services-ads:9.4.0'
+    //compile 'com.google.android.gms:play-services-ads:9.4.0'
+
+    //analytics
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    //ads
+    compile 'com.google.firebase:firebase-ads:9.6.1'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
