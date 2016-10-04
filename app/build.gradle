@@ -22,22 +22,19 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:24.2.1'
-
-    // Added for AdMob
-    //compile 'com.google.android.gms:play-services-ads:9.4.0'
-
-    //analytics
-    compile 'com.google.firebase:firebase-core:9.6.1'
-    //ads
-    compile 'com.google.firebase:firebase-ads:9.6.1'
 
     //include java library
     compile project(':joke_library')
 
-    compile project(":joke_activity")
+    compile project(':joke_activity')
 
 
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.google.firebase:firebase-core:9.6.1'
+    compile 'com.google.firebase:firebase-ads:9.6.1'
+    compile 'com.google.code.findbugs:jsr305:2.0.1'
+    compile project(path: ':backend', configuration:'android-endpoints')
 }
+
 
 apply plugin: 'com.google.gms.google-services'
