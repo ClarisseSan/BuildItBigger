@@ -47,9 +47,15 @@ public class MainActivityFragment extends Fragment {
 //                Toast toast = Toast.makeText(getContext(), joke, Toast.LENGTH_LONG);
 //                toast.show();
 
+                //get jokes from API using asynctask
+                EndpointAsyncTask endpointAsyncTask = new EndpointAsyncTask(getActivity());
+                endpointAsyncTask.execute();
+
+
                 Intent intent = new Intent(getActivity(),JokeActivity.class);
                 intent.putExtra(JokeActivity.joke, joke);
                 startActivity(intent);
+
 
             }
         });
