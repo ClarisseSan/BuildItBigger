@@ -20,6 +20,16 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    productFlavors{
+        free{
+            applicationId 'com.android.application.free'
+        }
+        paid{
+            applicationId 'com.android.application.paid'
+        }
+    }
+
 }
 
 dependencies {
@@ -43,5 +53,3 @@ dependencies {
     compile project(path: ':backend', configuration:'android-endpoints')
 }
 
-
-apply plugin: 'com.google.gms.google-services'
