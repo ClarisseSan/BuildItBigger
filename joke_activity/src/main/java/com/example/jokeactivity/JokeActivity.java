@@ -2,7 +2,6 @@ package com.example.jokeactivity;
 
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 public class JokeActivity extends ActionBarActivity implements JokeFragment.OnFragmentInteractionListener {
