@@ -3,14 +3,12 @@ package com.udacity.gradle.builditbigger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.Joker;
 import com.example.jokeactivity.JokeActivity;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -20,6 +18,8 @@ import com.google.android.gms.ads.AdView;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    private static final String LOG_TAG = MainActivityFragment.class.getSimpleName();
 
     public MainActivityFragment() {
     }
@@ -40,26 +40,30 @@ public class MainActivityFragment extends Fragment {
 
         Button btnJoke = (Button) root.findViewById(R.id.btnJoke);
         btnJoke.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Joker joker = new Joker();
-                String joke = joker.getJoke();
+//                Joker joker = new Joker();
+//                String joke = joker.getJoke();
 //                Toast toast = Toast.makeText(getContext(), joke, Toast.LENGTH_LONG);
 //                toast.show();
 
                 //get jokes from API using asynctask
-                EndpointAsyncTask endpointAsyncTask = new EndpointAsyncTask(getActivity());
+                EndpointAsyncTask endpointAsyncTask = new EndpointAsyncTask(getActivity(), new EndpointAsyncTask.AsyncResponse() {
+                    @Override
+                    public void processFinish(String output) {
+                        Log.d(LOG_TAG, "Response From Asynchronous task: " + output);
+                        String joke = output;
+                        Intent intent = new Intent(getActivity(), JokeActivity.class);
+                        intent.putExtra(JokeActivity.joke, joke);
+                        startActivity(intent);
+
+                    }
+                });
                 endpointAsyncTask.execute();
-
-
-                Intent intent = new Intent(getActivity(),JokeActivity.class);
-                intent.putExtra(JokeActivity.joke, joke);
-                startActivity(intent);
-
 
             }
         });
-
 
 
         return root;

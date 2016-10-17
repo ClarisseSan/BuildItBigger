@@ -3,7 +3,6 @@ package com.udacity.gradle.builditbigger;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.isse.myapplication.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
@@ -23,9 +22,20 @@ public class EndpointAsyncTask extends AsyncTask<Object, Object, String> {
     private Context mContext;
     private static MyApi myApiService = null;
     private final String LOG_TAG = EndpointAsyncTask.class.getSimpleName();
+    public AsyncResponse delegate = null;//Call back interface
 
-    public EndpointAsyncTask(Context context) {
+
+    public EndpointAsyncTask(Context context, AsyncResponse asyncResponse) {
         this.mContext = context;
+        this.delegate = asyncResponse;//Assigning call back interfacethrough constructor
+    }
+
+
+    /*
+    *declare an interface for callback
+    * */
+    public interface AsyncResponse {
+        void processFinish(String output);
     }
 
     @Override
@@ -36,7 +46,7 @@ public class EndpointAsyncTask extends AsyncTask<Object, Object, String> {
                     // options for running against local devappserver
                     // - 10.0.2.2 is localhost's IP address in Android emulator
                     // - turn off compression when running against local devappserver
-                    .setRootUrl("http://192.168.1.1:8080/_ah/api/")
+                    .setRootUrl("http://10.2.192.248:8080/_ah/api/")
                     .setGoogleClientRequestInitializer(new GoogleClientRequestInitializer() {
                         @Override
                         public void initialize(AbstractGoogleClientRequest<?> request) throws IOException {
@@ -67,6 +77,6 @@ public class EndpointAsyncTask extends AsyncTask<Object, Object, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Toast.makeText(mContext, result, Toast.LENGTH_LONG).show();
+        delegate.processFinish(result);
     }
 }
